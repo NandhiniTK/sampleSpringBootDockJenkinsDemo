@@ -1,0 +1,19 @@
+version: '2'
+services:
+  dock-server-1:
+    container_name: dock-server-1
+    image: sampledockproj1:latest
+    ports:
+      - "8003:8001"
+    networks:
+      - spring-cloud-network
+  dock-server-2:
+    container_name: dock-server-2
+    image: sampledockproj2:latest
+    ports:
+      - "8002:8002"
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
