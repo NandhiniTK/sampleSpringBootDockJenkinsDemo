@@ -9,7 +9,7 @@ pipeline {
         stage("Run apps") {
             steps {
                 sh '''
-                docker-compose -d up
+                docker-compose up -d
                 '''
             }
         }
