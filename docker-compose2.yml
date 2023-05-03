@@ -4,7 +4,7 @@ services:
     container_name: dock-server-1
     build: sampleDockProj1
     ports:
-      - "8003:8001"
+      - "8001:8001"
     networks:
       - spring-cloud-network
   dock-server-2:
