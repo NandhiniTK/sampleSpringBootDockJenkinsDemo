@@ -24,7 +24,7 @@ pipeline {
                 echo "Build Docker images stage"
                 dir('sampleDockProj1') {
                   sh '''
-                  docker build . -t nandhinitk/sampleDockProj1
+                  docker build . -t nandhinitk/sampledockproj1
                   '''
                 }
             }
@@ -34,7 +34,15 @@ pipeline {
             steps {
                 sh '''
                 docker login -u nandhinitk -p Kalakrish@13
-                docker push nandhinitk/sampleDockProj1
+                docker push nandhinitk/sampledockproj1
+                '''
+            }
+        }
+
+        stage("Push image to Docker hub") {
+            steps {
+                sh '''
+                docker run -p 8001:8080 nandhinitk/sampledockproj1
                 '''
             }
         }
