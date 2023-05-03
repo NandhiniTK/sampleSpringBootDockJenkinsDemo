@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    tools {
+        gradle '7.6.1'
+    }
+
+    stages {
+        stage("Run apps") {
+            steps {
+                sh '''
+                docker-compose up
+                '''
+            }
+        }
+    }
+}
