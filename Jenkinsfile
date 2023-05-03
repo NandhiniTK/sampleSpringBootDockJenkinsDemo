@@ -6,6 +6,18 @@ pipeline {
     }
 
     stages {
+        stage("Clean up") {
+            steps {
+                echo "Remove running container"
+                sh '''
+                docker stop dock-server-1
+                docker stop dock-server-2
+                docker rm dock-server-1
+                docker rm dock-server-2
+                '''
+            }
+        }
+
         stage("Build") {
             steps {
                 echo "Build stage"
@@ -54,8 +66,8 @@ pipeline {
         stage("Run apps") {
             steps {
                 sh '''
-                docker run -p 8001:8001 nandhinitk/sampledockproj1
-                docker run -p 8002:8002 nandhinitk/sampledockproj2
+                docker run -d --name dock-server-1 -p 8001:8001 nandhinitk/sampledockproj1
+                docker run -d --name dock-server-2 -p 8002:8002 nandhinitk/sampledockproj2
                 '''
             }
         }

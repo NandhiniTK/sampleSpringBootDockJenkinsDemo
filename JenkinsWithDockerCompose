@@ -6,6 +6,19 @@ pipeline {
     }
 
     stages {
+
+        stage("Clean up") {
+            steps {
+                echo "Remove running container"
+                sh '''
+                docker stop dock-server-1
+                docker stop dock-server-2
+                docker rm dock-server-1
+                docker rm dock-server-2
+                '''
+            }
+        }
+
         stage("Build") {
             steps {
                 echo "Build stage"
@@ -54,7 +67,7 @@ pipeline {
         stage("Run apps") {
             steps {
                 sh '''
-                docker-compose up
+                docker-compose up -d
                 '''
             }
         }
